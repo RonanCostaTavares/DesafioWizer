@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {useEffect , useState} from 'react';
 import styled from 'styled-components/native';
 import { useNavigation } from '@react-navigation/native';
 
-import ExpandIcon from '../assets/expand.svg';
 
 const Modal = styled.Modal``;
 
@@ -13,67 +12,65 @@ const ModalArea = styled.View`
 `;
 
 const ModalBody = styled.View`
-    backgroundColor: #83D6E3;
+    backgroundColor: #8BBE8A;
     borderTopLeftRadius: 20px;
     borderTopRightRadius: 20px;
-    minHeight: 300px;
-    padding: 10px 20px 40px 20px;
-`;
-
-const CloseButton = styled.TouchableOpacity`
-    width: 40px;
-    height: 40px;
+    padding: 0px 20px 40px 20px;
 `;
 
 const ModalItem = styled.View`
-    backgroundColor: #FFF;
     borderRadius: 10px;
     marginBottom: 15px;
-    padding: 10px;
 `;
 
 const UserInfo = styled.View`
-    flexDirection: row;
     alignItems: center;
 `;
 const UserAvatar = styled.Image`
-    width: 56px;
-    height: 56px;
+    width: 200px;
+    height: 200px;
     borderRadius: 20px;
     marginRight: 15px;
 `;
-const UserName = styled.Text`
+const UserItem = styled.Text`
     color: #000;
     fontSize: 18px;
     fontWeight: bold;
 `;
 
 
-export default ({show, setShow, user,service}) => {
+export default ({show, setShow,pokemonName,pokemonImage,pokemonHp,pokemonAtq,pokemonDef,pokemonVelo,pokemonHab}) => {
 
     const navigation = useNavigation();
 
+
     const handleCloseButtom = () => {
-        setShow(false)
+        setShow(false);
+
     }
+
 
     return(
         <Modal  
             transparent={true}
             visible={show}
             animationType="slide"
+            onPress={handleCloseButtom}
         >
 
             <ModalArea>
                 <ModalBody>
-                    <CloseButton onPress={handleCloseButtom}>
-                        <ExpandIcon width="40" height="40" fill="#000"/>
-                    </CloseButton>
 
                     <ModalItem>
                         <UserInfo>
-                            <UserAvatar source={{uri: user.avatar}}/>
-                            <UserName>{user.name}</UserName>
+                            <UserAvatar source={{uri: pokemonImage}}/>
+                            <UserItem>Name: {pokemonName}</UserItem>
+                            <UserItem>Hp: {pokemonHp}</UserItem> 
+                            <UserItem>Ataque: {pokemonAtq}</UserItem> 
+                            <UserItem>Defesa: {pokemonDef}</UserItem> 
+                            <UserItem>Velocidade: {pokemonVelo}</UserItem> 
+                            <UserItem>Habilidades: {pokemonHab}</UserItem> 
+
                         </UserInfo>
                     </ModalItem>
 
