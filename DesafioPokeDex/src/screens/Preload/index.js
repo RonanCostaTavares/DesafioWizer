@@ -5,9 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../../contexts/UserContext';
 
 
-import Api from '../../Api';
-
-
 export default () => {
 
     const {dispatch: userDispatch } = useContext(UserContext); 
@@ -15,16 +12,31 @@ export default () => {
 
     useEffect(()=> {
 
-        const checkToken = async() => {
-            //const token = await AsyncStorage.getItem('token');
+        const check = async() => {
+            const name = await AsyncStorage.getItem('Name');
+            const age = await AsyncStorage.getItem('Age')
 
-            navigation.reset({
-                routes: [{name: 'SignUp'}]
-            })
+            if(name && age){
 
+                userDispatch({
+                    type: 'setNameAndAge',
+                    payload:{
+                        name: name,
+                        age: age
+                    }
+                });
+
+                navigation.reset({
+                    routes: [{name: 'Home'}]
+                })
+            }else {
+                navigation.reset({
+                    routes: [{name: 'SignUp'}]
+                })
+            }
 
         }
-        checkToken();
+        check();
     }, []);
 
 
