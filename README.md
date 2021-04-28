@@ -1,8 +1,4 @@
 # Pokedex
-Desafio feito para o processo seletivo Wize
-
-
-
 
 # Sobre o projeto
 
